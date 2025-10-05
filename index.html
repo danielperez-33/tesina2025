@@ -199,28 +199,59 @@
 </footer>
 
 <!-- QRCode.js desde CDN para generar QR en el navegador -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-MNdG3bImh7fE5q9R6V3mTqk2Hc8u8N6b4Yw4eT+g8m8+fVf0h0Qe4o6Jr5w0lqg0f1l8s8d+M8GZ2o/2aZbQNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!-- Librería para generar el código QR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
 <script>
   let qr;
-  function makeQR(){
+
+  // Generar QR con la URL actual o la ingresada
+  function makeQR() {
     const el = document.getElementById('qrcode');
     el.innerHTML = '';
     const url = document.getElementById('qrUrl').value || window.location.href;
-    qr = new QRCode(el,{text:url,width:180,height:180,colorDark:'#000000',colorLight:'#ffffff',correctLevel: QRCode.CorrectLevel.H});
+    qr = new QRCode(el, {
+      text: url,
+      width: 180,
+      height: 180,
+      colorDark: '#000000',
+      colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.H
+    });
   }
-  function downloadQR(){
+
+  // Descargar el QR en formato PNG
+  function downloadQR() {
     const img = document.querySelector('#qrcode img');
     const canvas = document.querySelector('#qrcode canvas');
     const dataURL = img ? img.src : (canvas ? canvas.toDataURL('image/png') : null);
-    if(!dataURL){ alert('Generá el QR primero.'); return; }
+    if (!dataURL) {
+      alert('Primero generá el código QR.');
+      return;
+    }
     const a = document.createElement('a');
-    a.href = dataURL; a.download = 'QR_tesina.png'; a.click();
+    a.href = dataURL;
+    a.download = 'QR_tesina.png';
+    a.click();
   }
-  // Generar un QR inicial con la URL actual
-  window.addEventListener('DOMContentLoaded', () => { makeQR(); });
+
+  // Cargar la librería y generar el QR automáticamente al abrir la página
+  function ensureQRLib(cb) {
+    if (window.QRCode) return cb();
+    const s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  window.addEventListener('DOMContentLoaded', () => {
+    ensureQRLib(makeQR);
+  });
 </script>
+
 </body>
 </html>
+
 
 
 
