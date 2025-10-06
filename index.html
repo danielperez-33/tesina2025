@@ -43,6 +43,39 @@
     footer{padding:28px 0;color:#a7b7db}
     .small{font-size:.92rem;color:#a9bcde}
     .tag{display:inline-block;padding:.25rem .5rem;border:1px solid #2a3a61;border-radius:999px;margin-right:.5rem;color:#b7c7e7}
+    .gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+
+.img-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #233055;
+}
+
+.img-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+}
+
+.img-card .caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #e8eefc;
+  font-size: 0.9rem;
+  padding: 6px;
+  text-align: center;
+  backdrop-filter: blur(3px);
+  letter-spacing: 0.3px;
+  font-weight: 600;}
+
   </style>
 </head>
 <body>
@@ -120,17 +153,31 @@
   </section>
 
   <section id="galeria">
-    <div class="container">
-      <h2>Imágenes</h2>
-      <div class="gallery" aria-label="Galería de imágenes">
-        <!-- Reemplazar por imágenes reales -->
-        <img src="Safety-Products-Overview-callouts-2023.png" alt="digrama de seguridad" />
-        <img src="media/image3.png" alt="Paletizado manual" />
-        <img src="media/image4.png" alt="Paletizado automatico" />
-        <img src="media/image24.png" alt="sistema de seguridad" />
+  <div class="container">
+    <h2>Imágenes</h2>
+    <div class="gallery" aria-label="Galería de imágenes">
+      <div class="img-card">
+        <img src="Safety-Products-Overview-callouts-2023.png" alt="Diagrama de seguridad">
+        <div class="caption">Diagrama de Seguridad</div>
+      </div>
+
+      <div class="img-card">
+        <img src="media/image3.png" alt="Paletizado manual">
+        <div class="caption">Paletizado Manual</div>
+      </div>
+
+      <div class="img-card">
+        <img src="media/image4.png" alt="Paletizado automático">
+        <div class="caption">Paletizado Automático</div>
+      </div>
+
+      <div class="img-card">
+        <img src="media/image24.png" alt="Sistema de seguridad">
+        <div class="caption">Sistema de Seguridad</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
   <section id="descargas">
     <div class="container">
@@ -251,6 +298,7 @@
 
 </body>
 </html>
+
 
 
 
